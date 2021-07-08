@@ -1,10 +1,12 @@
 package com.vn.controller;
 
 import com.vn.Utils;
-import com.vn.configurations.TokenProvider;
+import com.vn.entity.RefreshToken;
 import com.vn.payloads.request.LoginRequest;
+import com.vn.payloads.request.RefreshTokenRequest;
 import com.vn.payloads.request.SignupRequest;
 import com.vn.payloads.response.JwtResponse;
+import com.vn.service.TokenProvider;
 import com.vn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +33,6 @@ public class AuthController {
     private TokenProvider tokenProvider;
     @Autowired
     private UserService userService;
-
 
     @PostMapping(value = "/signin")
     public ResponseEntity<?> signin(@Valid @RequestBody LoginRequest request, BindingResult result) {
@@ -60,7 +61,8 @@ public class AuthController {
                         user.getAuthorities()
                                 .stream()
                                 .map(GrantedAuthority::getAuthority)
-                                .collect(Collectors.toList())
+                                .collect(Collectors.toList()),
+                        tokenProvider.createRefreshToken(user.getUsername()).getToken()
                 ),
                 null
         ));
@@ -81,6 +83,40 @@ public class AuthController {
         try {
             userService.signup(request);
             return ResponseEntity.ok(Utils.buildResponse(0, null, null, null));
+        } catch (Exception exception) {
+            return ResponseEntity.ok(Utils.buildResponse(1, exception.getMessage(), null, null));
+        }
+    }
+
+    @PostMapping("/refreshToken")
+    public ResponseEntity<?> refreshToken(@Valid @RequestBody RefreshTokenRequest request, BindingResult result) {
+        if (result.hasErrors())
+            return ResponseEntity.ok(
+                    Utils.buildResponse(
+                            99,
+                            "Info not null or empty",
+                            null,
+                            result.getFieldErrors()
+                    )
+            );
+        try {
+            RefreshToken newToken = tokenProvider.findRefreshToken(request);
+            com.vn.entity.User user = newToken.getUser();
+            return ResponseEntity.ok(Utils.buildResponse(
+                    0,
+                    null,
+                    new JwtResponse(
+                            tokenProvider.generatedJwt(user.getUsername()),
+                            "Bearer",
+                            user.getUsername(),
+                            user.getRoles()
+                                    .stream()
+                                    .map(value -> value.getRoleName().name())
+                                    .collect(Collectors.toList()),
+                            newToken.getToken()
+                    ),
+                    null
+            ));
         } catch (Exception exception) {
             return ResponseEntity.ok(Utils.buildResponse(1, exception.getMessage(), null, null));
         }
