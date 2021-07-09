@@ -21,6 +21,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional
+    /**
+     * dùng @Transactional. Đê khiến toàn bộ code chạy trong hàm đều nằm trong Session quản lý của Hibernate.
+     *
+     * Nếu không có @Transactional thì việc bạn gọi user.getRoles() sẽ bị lỗi,
+     * vì nó không thể query xuống database để lấy dữ liệu roles lên được
+     */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user;
         try {

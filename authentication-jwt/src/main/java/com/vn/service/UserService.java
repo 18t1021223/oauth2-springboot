@@ -66,7 +66,7 @@ public class UserService {
     public List<Object> findAll() throws IllegalAccessException {
         String excludes[] = new String[]{"password"};
 
-        List<Object> objects = new ArrayList<>();
+        List<Object> objects;
         objects = userRepository.findAll()
                 .stream()
                 .map(value -> {

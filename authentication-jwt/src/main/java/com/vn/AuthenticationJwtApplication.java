@@ -5,6 +5,7 @@ import com.vn.entity.Role;
 import com.vn.entity.User;
 import com.vn.reposiroty.RoleRepository;
 import com.vn.reposiroty.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 
 @SpringBootApplication
+@Slf4j
 public class AuthenticationJwtApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
@@ -40,7 +42,7 @@ public class AuthenticationJwtApplication implements CommandLineRunner {
             user.setUsername("nguyen van a");
             user.setPassword(passwordEncoder.encode("123"));
             user.setRoles(Collections.singletonList(role));
-            userRepository.save(user);
+            log.info("{}", userRepository.save(user));
         }
     }
 }
