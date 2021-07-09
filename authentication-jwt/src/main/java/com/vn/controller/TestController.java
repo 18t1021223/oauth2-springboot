@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-@PreAuthorize(value = "hasRole('MODERATOR') or hasRole('ADMIN')")
+@PreAuthorize(value = "customIsMember('MODERATOR')")    // hasRole('MODERATOR') or hasRole('USER')
 public class TestController {
     @Autowired
     private UserService userService;

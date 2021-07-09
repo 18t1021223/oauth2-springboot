@@ -3,7 +3,6 @@ package com.vn.configurations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -18,10 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
-//The @EnableGlobalMethodSecurity permits to specify security on the method level.
-// Its attribute proxyTargetClass is set in order to have this working for RestController’s methods,
-// because controllers are usually classes, not implementing any interfaces.
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -30,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public CustomAuthenticationEntryPoint authenticationEntryPoint(){
+    public CustomAuthenticationEntryPoint authenticationEntryPoint() {
         return new CustomAuthenticationEntryPoint();
     }
 
