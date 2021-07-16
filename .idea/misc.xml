@@ -5,9 +5,12 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/security-oauth-authorization-server/pom.xml" />
         <option value="$PROJECT_DIR$/spring-swagger/pom.xml" />
         <option value="$PROJECT_DIR$/auth-server-resource-server/pom.xml" />
+        <option value="$PROJECT_DIR$/authentication-jwt/pom.xml" />
+        <option value="$PROJECT_DIR$/authorization-server-5/pom.xml" />
+        <option value="$PROJECT_DIR$/resource-server-5/pom.xml" />
+        <option value="$PROJECT_DIR$/api-client-5/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+    security:
+      oauth2:
+        client:
+          registration:
+            articles-client-oidc:
+              client-id: articles-client
+              client-secret: secret
+              authorization-grant-type: authorization_code
+              redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+              scope: openid
+            articles-client-authorization-code:
+              client-id: articles-client
+              client-secret: secret
+              authorization-grant-type: authorization_code
+              redirect-uri: "{baseUrl}/authorized"
+              scope: articles.read
+          provider:
+            spring:
+              issuer-uri: http://127.0.0.1:9000

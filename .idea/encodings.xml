@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/auth-server-resource-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-client-5/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/auth-server-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authentication-jwt/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authorization-server-5/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/entities/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/security-oauth-authorization-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resource-server-5/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-swagger/src/main/java" charset="UTF-8" />
   </component>
 </project>
